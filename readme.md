@@ -2,7 +2,7 @@
 
 This extension allows people to login and register through a social network account in your Magento 2 Store. I created this extension to fit my needs.
 
-This extension was made from scratch using the javascript SDK of Facebook and Google API.
+This extension was made from scratch using the javascript SDK of Facebook and Google API
 
 ## Social Networks Supported
 - [Facebook](https://developers.facebook.com/apps)
@@ -45,4 +45,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 
 * This plugin was inspired  by **[mageplaza/magento-2-social-login](https://github.com/mageplaza/magento-2-social-login)**
-* This plugin uses **[fontawesome](https://fontawesome.io/)**
+* This plugin uses **[fontawesome](http://fontawesome.io/)**

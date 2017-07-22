@@ -100,7 +100,9 @@ class Process extends \Magento\Framework\App\Action\Action
         }
         return $this->cookieMetadataFactory;
     }
+    
     /**
+     * Check the POST sent by the Social Network and logins or register the customer to the site.
      * @return \Magento\Framework\View\Result\Page
      */
     public function execute()
@@ -111,41 +113,39 @@ class Process extends \Magento\Framework\App\Action\Action
             $data = $this->getRequest()->getPostValue();
             //Social Validation
             $sfid = null;
-            if (isset($data['fbid'])){
+            if (isset($data['fbid'])) {
                 $sfid = ['fbid','Facebook'];
             }
-            if (isset($data['googid'])){
+            if (isset($data['googid'])) {
                 $sfid = ['googid','Google'];
             }
-            if ($sfid[0]){
+            if ($sfid[0]) {
                 $search = $this->_customersCollection->create()
                             ->addAttributeToSelect('*')
-                            ->addAttributeToFilter($sfid[0],$data[$sfid[0]])
+                            ->addAttributeToFilter($sfid[0], $data[$sfid[0]])
                             ->getFirstItem();
                 $customer_id = (int) $search->getId();
-                if ($customer_id){
+                if ($customer_id) {
                     $this->session->loginById($customer_id);
                     return $this->handleredirect();
-                }
-                else{
+                } else {
                     $search = $this->_customersCollection->create()
                             ->addAttributeToSelect('*')
-                            ->addAttributeToFilter('email',$data['email'])
+                            ->addAttributeToFilter('email', $data['email'])
                             ->getFirstItem();
                     $customer_id = (int) $search->getId();
-                    if ($customer_id){
+                    if ($customer_id) {
                         $customer = $this->customerFactory->create()->load($customer_id);
-                        $customer->setData($sfid[0],$data[$sfid[0]]);
+                        $customer->setData($sfid[0], $data[$sfid[0]]);
                         
-                        try{
+                        try {
                             $customer->save();
                             $this->session->loginById($customer->getId());
-                            $this->messageManager->addSuccess(__('Your %social account is now Linked with your account',['social' => $sfid[1]]));
+                            $this->messageManager->addSuccess(__('Your %social account is now Linked with your account', ['social' => $sfid[1]]));
                             return $this->handleredirect();
-                        }
-                        catch (\Exception $e){
+                        } catch (\Exception $e) {
                             $this->messageManager->addError($this->escaper->escapeHtml($e->getMessage()));
-                            return $resultRedirect->setPath('customer/account/login'); 
+                            return $resultRedirect->setPath('customer/account/login');
                         }
                     }
                 }
@@ -160,7 +160,7 @@ class Process extends \Magento\Framework\App\Action\Action
             $customer->addData($data);
             $customer->setPassword($password);
             
-            try{
+            try {
                 // Save data
                 $customer->save();
                 $this->_eventManager->dispatch(
@@ -170,8 +170,7 @@ class Process extends \Magento\Framework\App\Action\Action
                 $customer->sendNewAccountEmail();
                 $this->session->loginById($customer->getId());
                 return $this->handleredirect();
-            }
-            catch (StateException $e) {
+            } catch (StateException $e) {
                 $url = $this->urlModel->getUrl('customer/account/forgotpassword');
                 // @codingStandardsIgnoreStart
                 $message = __(
@@ -180,26 +179,23 @@ class Process extends \Magento\Framework\App\Action\Action
                 );
                 // @codingStandardsIgnoreEnd
                 $this->messageManager->addError($message);
-            }
-            catch (InputException $e) {
+            } catch (InputException $e) {
                 $this->messageManager->addError($this->escaper->escapeHtml($e->getMessage()));
                 foreach ($e->getErrors() as $error) {
                     $this->messageManager->addError($this->escaper->escapeHtml($error->getMessage()));
                 }
-            }
-            catch (LocalizedException $e) {
+            } catch (LocalizedException $e) {
                 $this->messageManager->addError($this->escaper->escapeHtml($e->getMessage()));
             }
-            return $resultRedirect->setPath('customer/account/login'); 
-        }
-        else{
+            return $resultRedirect->setPath('customer/account/login');
+        } else {
             $this->messageManager->addError(__('You attempted to do a forbidden action!.'));
             return $resultRedirect->setPath('/');
         }
-        
     }
 
-    private function handleredirect(){
+    private function handleredirect()
+    {
         if ($this->getCookieManager()->getCookie('mage-cache-sessid')) {
             $metadata = $this->getCookieMetadataFactory()->createCookieMetadata();
             $metadata->setPath('/');

@@ -10,7 +10,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $this->_storeManager = $storeManager;
         parent::__construct($context);
     }
-
+    /**
+     * Get a specific Config Value entered on the Admin Dashboard
+     * @param  string $path the path of the config key
+     * @return string       config value
+     */
     public function getConfigValue($path)
     {
         return $this->scopeConfig->getValue(

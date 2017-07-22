@@ -4,10 +4,6 @@ This extension allows people to login and register through a social network acco
 
 This extension was made from scratch using the javascript SDK of Facebook and Google API.
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
 ## Social Networks Supported
 - [Facebook](https://developers.facebook.com/apps)
 - [Google](https://code.google.com/apis/console/)

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+		<css src="Pekebyte_SocialLogin::css/font-awesome.min.css" ifconfig="pekebyte_social_login/general/enabled" />
+		<css src="Pekebyte_SocialLogin::css/buttonstyles.css" ifconfig="pekebyte_social_login/general/enabled" />
+	</head>
+    <body>
+    	<referenceBlock class="Magento\Customer\Block\Form\Login\Info" name="customer.new" template="Pekebyte_SocialLogin::login/newcustomer.phtml" ifconfig="pekebyte_social_login/general/enabled">
+    		<block class="Pekebyte\SocialLogin\Block\Frontend\SocialLogin" name="social.options" as="social_options" template="Pekebyte_SocialLogin::login/signinbuttons.phtml" cacheable="false" />
+    	</referenceBlock>
+        <referenceContainer name="before.body.end">
+            <block class="Pekebyte\SocialLogin\Block\Frontend\SocialLogin" name="social_login" template="Pekebyte_SocialLogin::login/scripts.phtml" cacheable="false" ifconfig="pekebyte_social_login/general/enabled" />
+        </referenceContainer>
+    </body>
+</page>

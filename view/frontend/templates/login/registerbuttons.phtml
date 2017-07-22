@@ -1,0 +1,13 @@
+<div class="block">
+	
+	<?php if ($block->isFacebookEnabled()): ?>
+		<br /><br />
+		<div class="social_button social_button_fb" onclick="processFB();"> <i class="fa fa-facebook" aria-hidden="true"></i> <?php echo __('Register with Facebook'); ?></div>
+	<?php endif; ?>
+
+	<?php if ($block->isGoogleEnabled()): ?>
+	<br /><br />
+		<div class="social_button social_button_google" onclick="loginGoogle();"><i class="fa fa-google" aria-hidden="true"></i> <?php echo __('Register with Google'); ?></a>
+	<?php endif; ?>
+	
+</div>

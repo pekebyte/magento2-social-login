@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+		<css src="Pekebyte_SocialLogin::css/font-awesome.min.css" ifconfig="pekebyte_social_login/general/enabled" />
+		<css src="Pekebyte_SocialLogin::css/buttonstyles.css" ifconfig="pekebyte_social_login/general/enabled" />
+	</head>
+    <body>
+    	<referenceContainer name="content">
+    		<block class="Pekebyte\SocialLogin\Block\Frontend\SocialLogin" name="social.options" as="social_options" before="customer_form_register" template="Pekebyte_SocialLogin::login/registerbuttons.phtml" cacheable="false" ifconfig="pekebyte_social_login/general/enabled" />
+    	</referenceContainer>
+        <referenceContainer name="before.body.end">
+            <block class="Pekebyte\SocialLogin\Block\Frontend\SocialLogin" name="social_login" template="Pekebyte_SocialLogin::login/scripts.phtml" cacheable="false" ifconfig="pekebyte_social_login/general/enabled" />
+        </referenceContainer>
+    </body>
+</page>

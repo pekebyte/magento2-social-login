@@ -1,0 +1,89 @@
+<?php if (!$block->isUserLoggedIn()): ?>
+<?php if($block->isFacebookEnabled()): ?>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '<?php echo $block->getFBAppId(); ?>',
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+  function processFB(){
+    var data = {};
+    FB.login(function(response) {
+      FB.api('/me', {fields: 'email,first_name,last_name'}, function(response) {
+        data.email = response.email;
+        data.firstname = response.first_name;
+        data.lastname = response.last_name;
+        data.fbid = response.id;
+        submitData(data);
+      });
+    }, {scope: 'email,public_profile'});
+  }
+</script>
+<?php endif; ?>
+<?php if ($block->isGoogleEnabled()): ?>
+  <script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
+  <script type="text/javascript">
+  
+  window.onLoadCallback = function(){
+    gapi.load('auth2', function() {
+      gapi.auth2.init({
+        client_id: "<?php echo $block->getGoogleApiKey(); ?>",
+        fetch_basic_profile: true,
+      }).then(function(){},function(){});
+    });
+  }
+  function loginGoogle(){
+    gapi.auth2
+        .getAuthInstance()
+        .signIn()
+        .then((googleUser) => {
+            onSignInGoogle(googleUser);
+        });
+  }
+  function onSignInGoogle(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    var name = profile.getName();
+    name = name.split(" ");
+    var data = {};
+    data.email = profile.getEmail();
+    data.firstname = name[0];
+    if (typeof name[1] != "undefined") {
+      data.lastname = name[1];
+    }
+    data.googid = profile.getId();
+    submitData(data);
+  }
+  </script>
+<?php endif;?>
+<?php if ($block->isFacebookEnabled() || $block->isGoogleEnabled()): ?>
+<script>
+function submitData(data){
+    var form = document.createElement("form");
+    document.body.appendChild(form);
+    form.method = "POST";
+    form.action = "<?php echo $block->getUrl('sociallogin/social/process'); ?>";
+    for (var property in data) {
+      if (data.hasOwnProperty(property)) {
+        var element = document.createElement("INPUT");
+        element.name = ""+property;
+        element.type = "hidden";
+        element.value = data[property];
+        form.appendChild(element);
+      }
+    }
+    form.submit();
+}
+</script>
+<?php endif; ?>
+<?php endif; ?>

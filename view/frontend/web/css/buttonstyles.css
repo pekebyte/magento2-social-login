@@ -1,0 +1,40 @@
+.social_button{
+  display: inline-block;
+  padding: .375rem 1rem;
+  /*font-size: 1rem;*/
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid #0275d8;
+  border-radius: .25rem;
+  color:#0275d8;
+  text-decoration: none;
+}
+
+.social_button:hover{
+  background-color: #0275d8;
+  color:#fff;
+  text-decoration: none;
+}
+
+.social_button_fb{
+  color:#3c66c4;
+  border: 1px solid #3c66c4;
+}
+
+.social_button_fb:hover{
+  background-color:#3c66c4;
+}
+
+.social_button_google{
+  color:#cf4332;
+  border: 1px solid #cf4332;
+}
+
+.social_button_google:hover{
+  background-color: #cf4332;
+}

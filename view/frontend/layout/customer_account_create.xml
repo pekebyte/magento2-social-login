@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
 	<head>
-		<css src="Pekebyte_SocialLogin::css/font-awesome.min.css" ifconfig="pekebyte_social_login/general/enabled" />
-		<css src="Pekebyte_SocialLogin::css/buttonstyles.css" ifconfig="pekebyte_social_login/general/enabled" />
+		<css src="Pekebyte_SocialLogin::css/font-awesome.min.css" />
+		<css src="Pekebyte_SocialLogin::css/buttonstyles.css" />
 	</head>
     <body>
     	<referenceContainer name="content">

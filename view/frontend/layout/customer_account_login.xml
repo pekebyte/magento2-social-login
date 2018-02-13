@@ -7,8 +7,8 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
 	<head>
-		<css src="Pekebyte_SocialLogin::css/font-awesome.min.css" ifconfig="pekebyte_social_login/general/enabled" />
-		<css src="Pekebyte_SocialLogin::css/buttonstyles.css" ifconfig="pekebyte_social_login/general/enabled" />
+		<css src="Pekebyte_SocialLogin::css/font-awesome.min.css" />
+		<css src="Pekebyte_SocialLogin::css/buttonstyles.css" />
 	</head>
     <body>
     	<referenceBlock class="Magento\Customer\Block\Form\Login\Info" name="customer.new" template="Pekebyte_SocialLogin::login/newcustomer.phtml" ifconfig="pekebyte_social_login/general/enabled">
